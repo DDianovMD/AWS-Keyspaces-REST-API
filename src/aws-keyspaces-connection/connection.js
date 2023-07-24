@@ -11,7 +11,7 @@ const auth = new cassandra.auth.PlainTextAuthProvider(
 const sslOptions1 = {
   ca: [
     fs.readFileSync(
-      path.join(process.cwd(), 'aws-keyspaces-connection/certificates/sf-class2-root.crt'),
+      path.join(process.cwd(), 'src/aws-keyspaces-connection/certificates/sf-class2-root.crt'),
       "utf-8"
     ),
   ],
