@@ -51,7 +51,7 @@ app.get("/employees/:employeeId", (req, res) => {
     .execute(query)
     .then((result) => {
       const employee = {
-        id: result.rows[0].id,
+        id: result.rows[0].id.toString(),
         firstName: result.rows[0].firstName,
         lastName: result.rows[0].lastName,
         phone: result.rows[0].phone,
@@ -69,9 +69,9 @@ app.get("/employees/:employeeId", (req, res) => {
 
 // Create
 app.post("/employees", (req, res) => {
-  const firstName = req.body[0].firstName;
-  const lastName = req.body[0].lastName;
-  const phone = req.body[0].phone;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const phone = req.body.phone;
 
   const query = `INSERT INTO employees.employee (id,"firstName","lastName",phone) VALUES (uuid(), '${firstName}', '${lastName}', '${phone}');`;
 
@@ -91,9 +91,9 @@ app.post("/employees", (req, res) => {
 
 // Update
 app.put("/employees/:employeeId", (req, res) => {
-  const firstName = req.body[0].firstName;
-  const lastName = req.body[0].lastName;
-  const phone = req.body[0].phone;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const phone = req.body.phone;
 
   const query = `UPDATE employees.employee SET "firstName" = '${firstName}', "lastName" = '${lastName}', phone = '${phone}' WHERE id = ${req.params.employeeId}`;
 
@@ -111,6 +111,7 @@ app.put("/employees/:employeeId", (req, res) => {
     });
 });
 
+// Delete
 app.delete("/employees/:employeeId", (req, res) => {
   const employeeId = req.params.employeeId;
 
